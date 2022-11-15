@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Models\Department;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,20 @@ Route::get('/', function () {
 });
 
 // hello
-Route::get('/hello', function(){
+Route::get('/hello', function () {
     return view('hello');
 });
 
-Route::get('/department/{id}', function($id){
-    return Department::find($id);
-});
+// Department query record by ID
+// Route::get('/department/{id}', function($id){
+//     return Department::find($id);
+// });
+
+// Department search record by phone number contoh : 012345566
+// akan department Department 66
+// Route::get('/department/search/{phone}', function($phone){
+//     return Department::wherePhone($phone)->get();
+// });
+
+// Routing deparment untuk CRUD
+Route::get('/department', [DepartmentController::class, 'index']);
