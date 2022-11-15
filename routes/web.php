@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Department;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,6 @@ Route::get('/hello', function(){
     return view('hello');
 });
 
-// atau
-// Route::view('/hello');
-
+Route::get('/department/{id}', function($id){
+    return Department::find($id);
+});
