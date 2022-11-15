@@ -35,5 +35,9 @@ Route::get('/hello', function () {
 //     return Department::wherePhone($phone)->get();
 // });
 
-// Routing deparment untuk CRUD
+/**
+ * DEPARMENT
+ * Routing deparment untuk CRUD
+ */
 Route::get('/department', [DepartmentController::class, 'index']);
+Route::get('/department/{id}', [DepartmentController::class, 'show'])->name('department.show');

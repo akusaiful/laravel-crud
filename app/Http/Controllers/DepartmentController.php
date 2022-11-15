@@ -17,4 +17,12 @@ class DepartmentController extends Controller
             'departments' => Department::paginate(10)
         ]);
     }
+
+    public function show($id)
+    {
+        return view('department.show', [
+            'department' => Department::find($id)
+        ]);
+    }
+
 }

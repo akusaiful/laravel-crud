@@ -60,7 +60,7 @@
                                     <td>{{ $department->email }}</td>
                                     <td>{{ $department->phone }}</td>
                                     <td width="150">
-                                        <a href="show.html" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
+                                        <a href="{{ route('department.show', $department->id) }}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
                                                 class="fa fa-eye"></i></a>
                                         <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary"
                                             title="Edit"><i class="fa fa-edit"></i></a>
@@ -73,7 +73,7 @@
                     </table>
 
                     {{ $departments->links() }}
-                    
+
                 </div>
             </div>
         </div>
