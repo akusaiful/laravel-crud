@@ -39,5 +39,7 @@ Route::get('/hello', function () {
  * DEPARMENT
  * Routing deparment untuk CRUD
  */
-Route::get('/department', [DepartmentController::class, 'index']);
+Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
 Route::get('/department/{id}', [DepartmentController::class, 'show'])->name('department.show');
+Route::get('/department/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
+Route::put('/department/{id}', [DepartmentController::class, 'update'])->name('department.update');

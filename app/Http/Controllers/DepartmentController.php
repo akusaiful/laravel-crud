@@ -25,4 +25,25 @@ class DepartmentController extends Controller
         ]);
     }
 
+    public function edit($id)
+    {
+        return view('department.edit', [
+            'department' => Department::find($id)
+        ]);
+    }
+
+    /** 
+     * Update
+     * Dependency Injector 
+     */
+    public function update(Request $request, $id)
+    {        
+        // code update massive assigment 
+        Department::find($id)->update($request->all());
+
+        // redirect user to index page
+        return redirect()->route('department.index');      
+
+    }
+
 }
