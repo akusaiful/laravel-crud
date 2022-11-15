@@ -37,7 +37,14 @@ class DepartmentController extends Controller
      * Dependency Injector 
      */
     public function update(Request $request, $id)
-    {        
+    {   
+        // validation
+        $request->validate([
+            'name' => 'required',            
+            'phone' => 'required',
+            'email' => 'required'
+        ]);
+        
         // code update massive assigment 
         Department::find($id)->update($request->all());
 

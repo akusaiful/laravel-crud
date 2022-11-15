@@ -16,31 +16,51 @@
                             <form action="{{ route('department.update', $department->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                
+
                                 <div class="form-group row">
                                     <label for="name" class="col-md-3 col-form-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="name" id="name" class="form-control"
-                                            value="{{ $department->name }}">
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
+                                        <input type="text" name="name" id="name"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ old('name', $department->name) }}">
+
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="phone" class="col-md-3 col-form-label">Phone</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="phone" id="phone" class="form-control"
-                                            value="{{ $department->phone }}">
+                                        <input type="text" name="phone" id="phone"
+                                            class="form-control @error('phone')
+                                            is-invalid
+                                        @enderror"
+                                            value="{{ old('phone', $department->phone) }}">
+                                        @error('phone')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email" class="col-md-3 col-form-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="email" id="email" class="form-control"
-                                            value="{{ $department->email }}">
+                                        <input type="text" name="email" id="email"
+                                            class="form-control @error('email')
+                                            is-invalid
+                                        @enderror"
+                                            value="{{ old('email', $department->email) }}">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
