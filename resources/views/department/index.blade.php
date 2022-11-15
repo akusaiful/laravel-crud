@@ -8,7 +8,7 @@
                     <div class="d-flex align-items-center">
                         <h2 class="mb-0">All Contacts</h2>
                         <div class="ml-auto">
-                            <a href="form.html" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
+                            <a href="{{ route('department.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                         </div>
                     </div>
                 </div>
@@ -42,6 +42,18 @@
                             </div>
                         </div>
                     </div>
+
+                    @if($message = session('message'))
+                    <div class="alert alert-success alert-fadeout">
+                        {{ $message }}
+                    </div>
+                    @endif
+
+                    <div class="mt-2 mb-2">
+                        Total records <b>{{ $departments->total() }}</b> |  
+                        Showing record {{ $departments->firstItem() }} from {{ $departments->lastItem() }}
+                    </div>
+
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -53,19 +65,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($departments as $department)
+                            @foreach ($departments as $index => $department)
                                 <tr>
-                                    <th scope="row">{{ $department->id }}</th>
+                                    <th scope="row">{{ $index + $departments->firstItem() }}</th>
                                     <td>{{ $department->name }}</td>
                                     <td>{{ $department->email }}</td>
                                     <td>{{ $department->phone }}</td>
                                     <td width="150">
+                                        <form action="{{ route('department.delete', $department->id) }}" method="POST" onsubmit=" return confirm('Are you sure?')">
+                                            @csrf
+                                            @method('DELETE')
+
+
                                         <a href="{{ route('department.show', $department->id) }}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
                                                 class="fa fa-eye"></i></a>
                                         <a href="{{ route('department.edit', $department->id) }}" class="btn btn-sm btn-circle btn-outline-secondary"
                                             title="Edit"><i class="fa fa-edit"></i></a>
-                                        <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
+                                        
+                                        <!-- Tidak boleh guna utk delete
+                                            <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
                                             onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                                        -->
+                                        <button class="btn btn-sm btn-circle btn-outline-danger">
+                                            <i class="fa fa-times"></i>
+                                        </button>                                        
+
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
