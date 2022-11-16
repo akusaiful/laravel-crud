@@ -61,6 +61,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
+                                <th>Total Contact</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -71,6 +72,7 @@
                                     <td>{{ $department->name }}</td>
                                     <td>{{ $department->email }}</td>
                                     <td>{{ $department->phone }}</td>
+                                    <td>{{ $department->contacts_count }}</td>
                                     <td width="150">
                                         <form action="{{ route('department.delete', $department->id) }}" method="POST" onsubmit=" return confirm('Are you sure?')">
                                             @csrf

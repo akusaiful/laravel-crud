@@ -24,7 +24,7 @@ class DepartmentSeeder extends Seeder
         $data = [];
 
         // Loop 5 rekod
-        foreach(range(1,100) as $key){
+        foreach(range(1,5) as $key){
             $data[] = [
                 'name' => 'Department ' . $key,
                 'phone' => '0123455' . $key,

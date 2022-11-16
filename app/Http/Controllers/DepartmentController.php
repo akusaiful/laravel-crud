@@ -14,7 +14,7 @@ class DepartmentController extends Controller
     {
         // tulis code untuk browsing
         return view('department.index', [
-            'departments' => Department::paginate(10)
+            'departments' => Department::withCount('contacts')->paginate(10)
         ]);
     }
 
