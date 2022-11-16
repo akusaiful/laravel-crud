@@ -31,6 +31,26 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-3 col-form-label">Total Contact</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-plaintext text-muted">{{ $department->contacts()->count() }}</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-3 col-form-label">Contact List</label>
+                                <div class="col-md-9">
+                                    <ol>
+
+                                        @foreach ($department->contacts as $contact)
+                                            <li>{{ $contact->name }} <i>({{ $contact->email }})</i></li>
+                                        @endforeach
+
+                                    </ol>
+                                </div>
+                            </div>
+
                             <hr>
                             <div class="form-group row mb-0">
                                 <div class="col-md-9 offset-md-3">
