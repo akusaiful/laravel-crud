@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -15,7 +17,8 @@ class ContactController extends Controller
     public function index()
     {
         return view('contact.index', [
-            'contacts' => Contact::paginate(10)
+            'departments' => Department::all(),
+            'contacts' => Contact::active()->filter()->paginate(10)
         ]);
     }
 
@@ -35,9 +38,9 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        //
+        
     }
 
     /**
@@ -46,9 +49,9 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contact $contact)
     {
-        //
+        return view('contact.show', compact('contact'));
     }
 
     /**
@@ -57,9 +60,10 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contact $contact)
     {
-        //
+        $departments = Department::all();
+        return view('contact.edit', compact('contact', 'departments'));
     }
 
     /**
@@ -69,9 +73,13 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        //
+        // save dan validate input field 
+        $contact->update($request->all());
+
+        // lepas update redirect ke show
+        return redirect()->route('contact.show', $contact->id);
     }
 
     /**
@@ -80,8 +88,11 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
-        //
+        $contact->is_deleted = true;
+        $contact->update();
+
+        return redirect()->route('contact.index')->with('message', 'Success');
     }
 }

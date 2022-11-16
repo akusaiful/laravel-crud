@@ -13,7 +13,7 @@
 
                         <div class="col-md-12">
                             <!-- JANGAN BUAT-BUAT LUPA LETAK TAG FORM -->
-                            <form action="{{ route('department.update', $department->id) }}" method="POST">
+                            <form action="{{ route('contact.update', $contact) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
@@ -22,7 +22,7 @@
                                     <div class="col-md-9">
                                         <input type="text" name="name" id="name"
                                             class="form-control @error('name') is-invalid @enderror"
-                                            value="{{ old('name', $department->name) }}">
+                                            value="{{ old('name', $contact->name) }}">
 
                                         @error('name')
                                             <div class="invalid-feedback">
@@ -39,7 +39,7 @@
                                             class="form-control @error('phone')
                                             is-invalid
                                         @enderror"
-                                            value="{{ old('phone', $department->phone) }}">
+                                            value="{{ old('phone', $contact->phone) }}">
                                         @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -55,8 +55,44 @@
                                             class="form-control @error('email')
                                             is-invalid
                                         @enderror"
-                                            value="{{ old('email', $department->email) }}">
+                                            value="{{ old('email', $contact->email) }}">
                                         @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="address" class="col-md-3 col-form-label">Address</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="address" id="address"
+                                            class="form-control @error('address')
+                                            is-invalid
+                                        @enderror"
+                                            value="{{ old('address', $contact->address) }}">
+                                        @error('address')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="department_id" class="col-md-3 col-form-label">Department</label>
+                                    <div class="col-md-9">
+
+                                        <select name="department_id" id="department_id" class="form-control">
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}"
+                                                    @if ($department->id == $contact->department_id) selected @endif>
+                                                    {{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('department_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

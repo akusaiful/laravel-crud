@@ -52,4 +52,5 @@ Route::post('/department', [DepartmentController::class, 'store'])->name('depart
  * CONTACT
  * Rounting contact CRUD
  */
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::resource('/contact', ContactController::class);
+
