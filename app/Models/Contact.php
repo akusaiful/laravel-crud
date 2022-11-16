@@ -28,8 +28,16 @@ class Contact extends Model
 
     public function scopeFilter(Builder $query)
     {
-        $filterDepartment = request()->filter_department;        
-        return $query->where('department_id', '=', $filterDepartment);
+        if ($filterDepartment = request()->filter_department) {
+            $query->where('department_id', '=', $filterDepartment);
+        }
 
+        // next query untuk search freetext
+        if ($querytext = request()->querytext) {
+            $query->where('name', 'like', "%$querytext%");
+        }
+
+        // chaining method so kita mesti queryBuilder
+        return $query;
     }
 }

@@ -36,6 +36,7 @@
                                         <div class="input-group mb-3">
                                             <input type="text" name='querytext' class="form-control"
                                                 placeholder="Search..." aria-label="Search..."
+                                                value="{{ request()->querytext }}"
                                                 aria-describedby="button-addon2">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button">
