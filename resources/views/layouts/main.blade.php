@@ -30,7 +30,7 @@
             <!-- /.navbar-header -->
             <div class="collapse navbar-collapse" id="navbar-toggler">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="#" class="nav-link">Departments</a></li>
+                    <li class="nav-item"><a href="{{ route('department.index') }}" class="nav-link">Departments</a></li>
                     <li class="nav-item active"><a href="#" class="nav-link">Contacts</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto">

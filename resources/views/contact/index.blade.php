@@ -6,9 +6,9 @@
             <div class="card">
                 <div class="card-header card-title">
                     <div class="d-flex align-items-center">
-                        <h2 class="mb-0">All Departments</h2>
+                        <h2 class="mb-0">All Contacts</h2>
                         <div class="ml-auto">
-                            <a href="{{ route('department.create') }}" class="btn btn-success"><i
+                            <a href="" class="btn btn-success"><i
                                     class="fa fa-plus-circle"></i> Add New</a>
                         </div>
                     </div>
@@ -48,8 +48,8 @@
                     @endif
 
                     <div class="mt-2 mb-2">
-                        Total records <b>{{ $departments->total() }}</b> |
-                        Showing record {{ $departments->firstItem() }} from {{ $departments->lastItem() }}
+                        Total records <b>{{ $contacts->total() }}</b> |
+                        Showing record {{ $contacts->firstItem() }} from {{ $contacts->lastItem() }}
                     </div>
 
                     <table class="table table-striped table-hover">
@@ -59,30 +59,32 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
-                                <th>Total Contact</th>
+                                <th scope="col">Active</th>
+                                <th scope="col">Bin</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($departments->total())
-                                @foreach ($departments as $index => $department)
+                            @if ($contacts->total())
+                                @foreach ($contacts as $index => $contact)
                                     <tr>
-                                        <th scope="row">{{ $index + $departments->firstItem() }}</th>
-                                        <td>{{ $department->name }}</td>
-                                        <td>{{ $department->email }}</td>
-                                        <td>{{ $department->phone }}</td>
-                                        <td>{{ $department->contacts_count }}</td>
+                                        <th scope="row">{{ $index + $contacts->firstItem() }}</th>
+                                        <td>{{ $contact->name }}</td>
+                                        <td>{{ $contact->email }}</td>
+                                        <td>{{ $contact->phone }}</td>
+                                        <td>{{ $contact->active }}</td>
+                                        <td>{{ $contact->is_deleted }}</td>
                                         <td width="150">
-                                            <form action="{{ route('department.delete', $department->id) }}" method="POST"
+                                            <form action="" method="POST"
                                                 onsubmit=" return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
 
 
-                                                <a href="{{ route('department.show', $department->id) }}"
+                                                <a href=""
                                                     class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
                                                         class="fa fa-eye"></i></a>
-                                                <a href="{{ route('department.edit', $department->id) }}"
+                                                <a href=""
                                                     class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i
                                                         class="fa fa-edit"></i></a>
 
@@ -106,7 +108,7 @@
                         </tbody>
                     </table>
 
-                    {{ $departments->links() }}
+                    {{ $contacts->links() }}
 
                 </div>
             </div>
