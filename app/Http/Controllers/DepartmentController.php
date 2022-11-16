@@ -9,18 +9,21 @@ class DepartmentController extends Controller
 {
     /**
      * Browsing department
+     * 
+     * Senarai deparment dipaparkan dekat method ini
+     * Query pun akan berlaku disini 
      */
-    public function index()
+    public function index(Request $request)
     {
-        // tulis code untuk browsing
         return view('department.index', [
-            'departments' => Department::withCount('contacts')->paginate(10)
+            'departments' => Department::withCount('contacts')
+                ->filter()->paginate(10)
         ]);
     }
 
     public function create()
     {
-        return view('department.create',[
+        return view('department.create', [
             'department' => new Department()
         ]);
     }
@@ -41,7 +44,6 @@ class DepartmentController extends Controller
 
         // buat dkt sini redirect ke show
         return redirect()->route('department.show', $department->id);
-        
     }
 
     public function show($id)
