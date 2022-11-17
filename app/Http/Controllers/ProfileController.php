@@ -6,6 +6,11 @@ use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('password.confirm');
+    }
+    
     public function setting()
     {
         return view('profile.setting', [
