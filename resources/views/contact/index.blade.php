@@ -9,7 +9,7 @@
 
                         @if (request()->recycle)
                             <h2 class="mb-0">All Contacts | RECYCLE BIN</h2>
-                            <div class="ml-auto">                                
+                            <div class="ml-auto">
                             </div>
                         @else
                             <h2 class="mb-0">All Contacts</h2>
@@ -17,7 +17,7 @@
                                 <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                             </div>
                         @endif
-                        
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,6 +25,11 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
                             <form action="">
+
+                                @if (request()->recycle)
+                                    <input type="hidden" name="recycle" value="bin">
+                                @endif
+
                                 <div class="row">
 
 
@@ -109,12 +114,18 @@
                                                         class="fa fa-edit"></i></a>
 
                                                 <!-- Tidak boleh guna utk delete
-                                                                            <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
-                                                                            onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                                                        -->
-                                                <button class="btn btn-sm btn-circle btn-outline-danger">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
+                                                                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
+                                                                                    onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                                                                                -->
+                                                @if (request()->recycle)
+                                                    <button class="btn btn-sm btn-circle btn-outline-success">
+                                                        <i class="fa fa-recycle"></i>
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-sm btn-circle btn-outline-danger">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                @endif
 
                                             </form>
                                         </td>
@@ -128,7 +139,7 @@
                         </tbody>
                     </table>
 
-                    {{ $contacts->links() }}
+                    {{ $contacts->appends(request()->all())->links() }}
 
                 </div>
             </div>

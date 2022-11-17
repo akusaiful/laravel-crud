@@ -31,7 +31,17 @@
             <div class="collapse navbar-collapse" id="navbar-toggler">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="{{ route('department.index') }}" class="nav-link">Departments</a></li>
-                    <li class="nav-item active"><a href="#" class="nav-link">Contacts</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contacts</a>
+                    
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('contact.index') }}">Contact</a>
+                            <a class="dropdown-item" href="{{ route('contact.index', ['recycle' => 'bin']) }}">
+                                Recycle Bin</a>
+                        </div>
+                    </li>
+                    
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-2"><a href="#" class="btn btn-outline-secondary">Login</a></li>
