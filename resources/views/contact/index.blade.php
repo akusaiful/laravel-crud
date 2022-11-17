@@ -94,7 +94,7 @@
                                                 @method('DELETE')
 
 
-                                                <a href="" class="btn btn-sm btn-circle btn-outline-info"
+                                                <a href="{{ route('contact.show', $contact) }}" class="btn btn-sm btn-circle btn-outline-info"
                                                     title="Show"><i class="fa fa-eye"></i></a>
                                                 <a href="{{ route('contact.edit', $contact) }}"
                                                     class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i

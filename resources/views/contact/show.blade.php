@@ -48,9 +48,14 @@
                             <hr>
                             <div class="form-group row mb-0">
                                 <div class="col-md-9 offset-md-3">
-                                    <a href="{{ route('contact.edit', $contact) }}" class="btn btn-info">Edit</a>
-                                    <a href="#" class="btn btn-outline-danger">Delete</a>
+                                    <form action="{{ route('contact.destroy', $contact) }}" method="POST"
+                                                onsubmit=" return confirm('Are you sure?')">
+                                                @csrf
+                                                @method('DELETE')
+                                    <a href="{{ route('contact.edit', $contact) }}" class="btn btn-info">Edit</a>                                    
+                                    <button class="btn btn-outline-danger">Delete</button>
                                     <a href="{{ route('contact.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
