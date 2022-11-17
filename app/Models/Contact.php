@@ -46,4 +46,10 @@ class Contact extends Model
         // chaining method so kita mesti queryBuilder
         return $query;
     }
+
+    public function getActiveIcon()
+    {
+        $icon = $this->active? 'done' : 'close';
+        return asset("assets/img/$icon.png");
+    }
 }

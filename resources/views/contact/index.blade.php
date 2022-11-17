@@ -97,7 +97,7 @@
                                         <td>{{ $contact->name }}</td>
                                         <td>{{ $contact->email }}</td>
                                         <td>{{ $contact->phone }}</td>
-                                        <td class="text-center">{{ $contact->active }}</td>
+                                        <td class="text-center"><img src="{{ $contact->getActiveIcon() }}" width="15px"></td>
                                         <td class="text-center">{{ $contact->is_deleted }}</td>
                                         <td width="150">
                                             <form action="{{ route('contact.destroy', $contact) }}" method="POST"
