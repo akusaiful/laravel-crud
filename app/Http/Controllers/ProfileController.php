@@ -10,7 +10,7 @@ class ProfileController extends Controller
     {
         $this->middleware('password.confirm');
     }
-    
+
     public function setting()
     {
         return view('profile.setting', [
@@ -20,8 +20,15 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
+        $data = [];
+        if ($request->profile_picture) {
+            $request->profile_picture->move(public_path('upload'), $filename = $request->user()->id . '-avatar.jpg');            
+            $data['profile_picture'] = $filename;            
+        }
+
         // update profile
-        auth()->user()->update($request->all());                
+        auth()->user()->update(array_merge($request->all(), $data));
+
         return redirect()->back()->withSuccess('Record successfully update!');
     }
 }
