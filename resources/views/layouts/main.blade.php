@@ -32,30 +32,42 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="{{ route('department.index') }}" class="nav-link">Departments</a></li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contacts</a>
-                    
+                        <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Contacts</a>
+
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ route('contact.index') }}">Contact</a>
                             <a class="dropdown-item" href="{{ route('contact.index', ['recycle' => 'bin']) }}">
                                 Recycle Bin</a>
                         </div>
                     </li>
-                    
+
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mr-2"><a href="#" class="btn btn-outline-secondary">Login</a></li>
-                    <li class="nav-item"><a href="#" class="btn btn-outline-primary">Register</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            John Travolta
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="profile.html">Settings</a>
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </div>
-                    </li>
+
+                    @guest
+                    <li class="nav-item mr-2"><a href="{{ route('login') }}" class="btn btn-outline-secondary">Login</a></li>
+                    <li class="nav-item"><a href="{{ route('register') }}" class="btn btn-outline-primary">Register</a></li>
+                    @endguest
+
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <a class="dropdown-item" href="profile.html">Settings</a>
+                                    <button class="dropdown-item">Logout</button>
+                                </form>
+
+                            </div>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -64,8 +76,8 @@
     <!-- content -->
     <main class="py-5">
         <div class="container">
-            @yield('content') 
-                       
+            @yield('content')
+
         </div>
     </main>
 

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,13 +42,15 @@ Route::get('/hello', function () {
  * DEPARTMENT
  * Routing deparment untuk CRUD
  */
-Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
-Route::get('/department/create', [DepartmentController::class, 'create'])->name('department.create');
-Route::get('/department/{id}', [DepartmentController::class, 'show'])->name('department.show');
-Route::get('/department/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
-Route::put('/department/{id}', [DepartmentController::class, 'update'])->name('department.update');
-Route::delete('/department/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
-Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
+    Route::get('/department/create', [DepartmentController::class, 'create'])->name('department.create');
+    Route::get('/department/{id}', [DepartmentController::class, 'show'])->name('department.show');
+    Route::get('/department/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
+    Route::put('/department/{id}', [DepartmentController::class, 'update'])->name('department.update');
+    Route::delete('/department/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
+    Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
+});
 
 /**
  * CONTACT
@@ -54,3 +58,14 @@ Route::post('/department', [DepartmentController::class, 'store'])->name('depart
  */
 Route::resource('/contact', ContactController::class);
 
+/**
+ * Dimasukkan oleh auth scaffold
+ */
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/**
+ * Profile controller
+ */
+Route::get('/profile/setting', [ProfileController::class, 'setting'])->name('profile.setting');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
