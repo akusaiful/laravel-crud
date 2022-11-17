@@ -50,11 +50,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/department/{id}', [DepartmentController::class, 'update'])->name('department.update');
     Route::delete('/department/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
     Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
+
+    /**
+     * Profile controller
+     */
+    Route::get('/profile/setting', [ProfileController::class, 'setting'])->name('profile.setting');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 /**
  * CONTACT
  * Rounting contact CRUD
+ * 
+ * auth middleware protection dibuat dkt dalam __construct()
  */
 Route::resource('/contact', ContactController::class);
 
@@ -63,9 +71,3 @@ Route::resource('/contact', ContactController::class);
  */
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-/**
- * Profile controller
- */
-Route::get('/profile/setting', [ProfileController::class, 'setting'])->name('profile.setting');
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
