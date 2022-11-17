@@ -23,7 +23,13 @@ class Contact extends Model
      */
     public function scopeActive(Builder $query)
     {
-        return $query->whereIsDeleted(false);
+        if(request()->recycle){
+            $query->whereIsDeleted(true);
+        }else{
+            $query->whereIsDeleted(false);
+        }
+
+        return $query;
     }
 
     public function scopeFilter(Builder $query)

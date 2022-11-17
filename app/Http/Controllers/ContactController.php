@@ -16,8 +16,17 @@ class ContactController extends Controller
      */
     public function index()
     {
+        // filtering recycle;
+        // First method 1
+        // $contacts = Contact::where('jika ada recyle display recycle, jika tiada display normal')
+        //     ->paginate(10);
+
+        // second method
+        // - modified filter 
+
         return view('contact.index', [
             'departments' => Department::all(),
+            // 'contacts' => $contacts
             'contacts' => Contact::active()->filter()->paginate(10)
         ]);
     }
@@ -40,7 +49,6 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
-        
     }
 
     /**
@@ -79,7 +87,7 @@ class ContactController extends Controller
         $contact->update($request->all());
 
         // lepas update redirect ke show
-        return redirect()->route('contact.show', $contact->id);
+        return redirect()->route('contact.show', $contact->id)->with('toast_success', 'Record updated!');
     }
 
     /**
@@ -93,6 +101,6 @@ class ContactController extends Controller
         $contact->is_deleted = true;
         $contact->update();
 
-        return redirect()->route('contact.index')->with('message', 'Success');
+        return redirect()->route('contact.index')->with('success', 'Record successfully deleted');
     }
 }

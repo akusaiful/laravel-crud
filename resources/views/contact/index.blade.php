@@ -6,10 +6,18 @@
             <div class="card">
                 <div class="card-header card-title">
                     <div class="d-flex align-items-center">
-                        <h2 class="mb-0">All Contacts</h2>
-                        <div class="ml-auto">
-                            <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
-                        </div>
+
+                        @if (request()->recycle)
+                            <h2 class="mb-0">All Contacts | RECYCLE BIN</h2>
+                            <div class="ml-auto">                                
+                            </div>
+                        @else
+                            <h2 class="mb-0">All Contacts</h2>
+                            <div class="ml-auto">
+                                <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
+                            </div>
+                        @endif
+                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -36,8 +44,7 @@
                                         <div class="input-group mb-3">
                                             <input type="text" name='querytext' class="form-control"
                                                 placeholder="Search..." aria-label="Search..."
-                                                value="{{ request()->querytext }}"
-                                                aria-describedby="button-addon2">
+                                                value="{{ request()->querytext }}" aria-describedby="button-addon2">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button">
                                                     <i class="fa fa-refresh"></i>
@@ -94,16 +101,17 @@
                                                 @method('DELETE')
 
 
-                                                <a href="{{ route('contact.show', $contact) }}" class="btn btn-sm btn-circle btn-outline-info"
-                                                    title="Show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('contact.show', $contact) }}"
+                                                    class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
+                                                        class="fa fa-eye"></i></a>
                                                 <a href="{{ route('contact.edit', $contact) }}"
                                                     class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i
                                                         class="fa fa-edit"></i></a>
 
                                                 <!-- Tidak boleh guna utk delete
-                                                                        <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
-                                                                        onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                                                    -->
+                                                                            <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
+                                                                            onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                                                                        -->
                                                 <button class="btn btn-sm btn-circle btn-outline-danger">
                                                     <i class="fa fa-times"></i>
                                                 </button>
@@ -126,4 +134,11 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('js')
+    <script>
+        $('.alert-fadeout').fadeOut(1000);
+    </script>
 @endsection

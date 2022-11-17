@@ -54,13 +54,18 @@
     <!-- content -->
     <main class="py-5">
         <div class="container">
-            @yield('content')
+            @yield('content') 
+                       
         </div>
     </main>
 
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+    @include('sweetalert::alert')
+
+    @yield('js')
 </body>
 
 </html>
