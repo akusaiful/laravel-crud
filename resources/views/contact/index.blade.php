@@ -97,8 +97,8 @@
                                         <td>{{ $contact->name }}</td>
                                         <td>{{ $contact->email }}</td>
                                         <td>{{ $contact->phone }}</td>
-                                        <td class="text-center"><img src="{{ $contact->getActiveIcon() }}" width="15px"></td>
-                                        <td class="text-center">{{ $contact->is_deleted }}</td>
+                                        <td class="text-center"><img src="{{ $contact->getActiveIcon() }}" width="18px"></td>
+                                        <td class="text-center"><img src="{{ $contact->getTrashIcon() }}" width="18px"></td>
                                         <td width="150">
                                             <form action="{{ route('contact.destroy', $contact) }}" method="POST"
                                                 onsubmit=" return confirm('Are you sure?')">

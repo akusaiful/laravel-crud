@@ -52,4 +52,11 @@ class Contact extends Model
         $icon = $this->active? 'done' : 'close';
         return asset("assets/img/$icon.png");
     }
+
+    public function getTrashIcon()
+    {
+        $icon = $this->is_deleted? 'trash' : 'trash_clean';
+        return asset("assets/img/$icon.png");
+    }
+
 }

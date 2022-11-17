@@ -32,7 +32,7 @@ class ContactController extends Controller
         return view('contact.index', [
             'departments' => Department::all(),
             // 'contacts' => $contacts
-            'contacts' => Contact::active()->filter()->paginate(10)
+            'contacts' => Contact::active()->filter()->paginate(10),            
         ]);
     }
 
