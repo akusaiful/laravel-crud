@@ -12,7 +12,7 @@
                             <div class="ml-auto">
                             </div>
                         @else
-                            <h2 class="mb-0">All Contacts</h2>
+                            <h2 class="mb-0">{{ __('contact.title')}}</h2>
                             <div class="ml-auto">
                                 <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                             </div>

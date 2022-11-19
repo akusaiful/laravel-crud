@@ -71,3 +71,8 @@ Route::resource('/contact', ContactController::class);
  */
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/{locale}', function($locale){    
+    session()->put('locale', $locale);        
+    return redirect('/contact');
+});
