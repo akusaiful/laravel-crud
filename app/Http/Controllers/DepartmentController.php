@@ -48,8 +48,10 @@ class DepartmentController extends Controller
 
     public function show($id)
     {
+        $department = Department::with('contacts')->find($id);
         return view('department.show', [
-            'department' => Department::find($id)
+            'department' => $department,
+            'contacts' => $department->contacts()->paginate(10)
         ]);
     }
 
@@ -77,7 +79,7 @@ class DepartmentController extends Controller
         Department::find($id)->update($request->all());
 
         // redirect user to index page
-        return redirect()->route('department.index');
+        return redirect()->route('department.index')->with('toast_success', 'Record updated successfully.');
     }
 
     // Delete method
@@ -87,7 +89,7 @@ class DepartmentController extends Controller
         Department::find($id)->delete();
 
         return redirect()->route('department.index')
-            ->with('message', 'Ok bro dah delete. Setel!');
+            ->with('toast_success', 'Ok bro dah delete. Setel!');
 
         // delete destory terus tanpa kata2         
         // Department::destroy($id);

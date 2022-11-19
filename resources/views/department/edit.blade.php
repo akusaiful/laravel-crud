@@ -69,7 +69,7 @@
                                 <div class="form-group row mb-0">
                                     <div class="col-md-9 offset-md-3">
                                         <button type="submit" class="btn btn-primary">Save</button>
-                                        <a href="index.html" class="btn btn-outline-secondary">Cancel</a>
+                                        <a href="{{ route('department.index') }}" class="btn btn-outline-secondary">Cancel</a>
                                     </div>
                                 </div>
                                 <!-- SINI JGN LUPA JUGA ENDING FORM -->

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('hello');
 });
 
 // hello
@@ -64,7 +64,10 @@ Route::middleware('auth')->group(function () {
  * 
  * auth middleware protection dibuat dkt dalam __construct()
  */
+Route::get('/contact/recycle', [ContactController::class, 'recycle'])->name('contact.recycle');
+Route::post('/contact/restore/{contact}', [ContactController::class, 'restore'])->name('contact.restore');
 Route::resource('/contact', ContactController::class);
+
 
 /**
  * Dimasukkan oleh auth scaffold

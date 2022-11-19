@@ -4,11 +4,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header card-title">
+                <div class="card-header card-title-recycle">
                     <div class="d-flex align-items-center">
-                        <div class="mb-0">{{ __('contact.title') }}</div>
+                        All Contacts | RECYCLE BIN
                         <div class="ml-auto">
-                            <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                         </div>
                     </div>
                 </div>
@@ -17,6 +16,7 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
                             <form action="">
+                                <input type="hidden" name="recycle" value="bin">
                                 @include('contact._filter_form')
                             </form>
                         </div>
@@ -44,7 +44,10 @@
                                 @foreach ($contacts as $index => $contact)
                                     <tr>
                                         <th scope="row">{{ $index + $contacts->firstItem() }}</th>
-                                        <td>{{ $contact->name }}</td>
+                                        <td>{{ $contact->name }} <br />
+                                            <i>Delete by : {{ $contact->deleteBy->name  }} on {{ $contact->delete_timestamp->format('d-m-Y G:i:s') }}</i>
+                                        
+                                        </td>
                                         <td>{{ $contact->email }}</td>
                                         <td>{{ $contact->phone }}</td>
                                         <td class="text-center"><img src="{{ $contact->getActiveIcon() }}" width="18px">
@@ -52,10 +55,9 @@
                                         <td class="text-center"><img src="{{ $contact->getTrashIcon() }}" width="18px">
                                         </td>
                                         <td width="150">
-                                            <form action="{{ route('contact.destroy', $contact) }}" method="POST"
+                                            <form action="{{ route('contact.restore', $contact) }}" method="POST"
                                                 onsubmit=" return confirm('Are you sure?')">
-                                                @csrf
-                                                @method('DELETE')
+                                                @csrf                                                
 
 
                                                 <a href="{{ route('contact.show', $contact) }}"
@@ -66,12 +68,12 @@
                                                         class="fa fa-edit"></i></a>
 
                                                 <!-- Tidak boleh guna utk delete
-                                                                                            <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
-                                                                                            onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                                                                        -->
+                                                                                                <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
+                                                                                                onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                                                                                            -->
 
-                                                <button class="btn btn-sm btn-circle btn-outline-danger">
-                                                    <i class="fa fa-times"></i>
+                                                <button class="btn btn-sm btn-circle btn-outline-success">
+                                                    <i class="fa fa-recycle"></i>
                                                 </button>
 
 
@@ -81,7 +83,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6">No record found</td>
+                                    <td colspan="7">No record found</td>
                                 </tr>
                             @endif
                         </tbody>

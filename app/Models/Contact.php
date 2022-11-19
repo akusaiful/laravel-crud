@@ -12,9 +12,16 @@ class Contact extends Model
 
     protected $fillable = ['name', 'email', 'phone', 'address', 'department_id'];
 
+    protected $dates = ['delete_timestamp'];
+
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function deleteBy()
+    {
+        return $this->belongsTo(User::class, 'delete_user_id');
     }
 
     /**
@@ -23,13 +30,12 @@ class Contact extends Model
      */
     public function scopeActive(Builder $query)
     {
-        if(request()->recycle){
-            $query->whereIsDeleted(true);
-        }else{
-            $query->whereIsDeleted(false);
-        }
+        return $query->whereIsDeleted(false);
+    }
 
-        return $query;
+    public function scopeRecycle(Builder $query)
+    {
+        return $query->whereIsDeleted(true);
     }
 
     public function scopeFilter(Builder $query)
@@ -49,14 +55,21 @@ class Contact extends Model
 
     public function getActiveIcon()
     {
-        $icon = $this->active? 'done' : 'close';
+        $icon = $this->active ? 'done' : 'close';
         return asset("assets/img/$icon.png");
     }
 
     public function getTrashIcon()
     {
-        $icon = $this->is_deleted? 'trash' : 'trash_clean';
+        $icon = $this->is_deleted ? 'trash' : 'trash_clean';
         return asset("assets/img/$icon.png");
     }
 
+    public function getDepartment()
+    {
+        if($this->department)
+        return $this->department->name;
+
+        return '(SYS) Department not found. Please move user to other department.';
+    }
 }

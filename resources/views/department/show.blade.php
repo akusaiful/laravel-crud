@@ -38,30 +38,70 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="phone" class="col-md-3 col-form-label">Contact List</label>
-                                <div class="col-md-9">
-                                    <ol>
-
-                                        @foreach ($department->contacts as $contact)
-                                            <li>{{ $contact->name }} <i>({{ $contact->email }})</i></li>
-                                        @endforeach
-
-                                    </ol>
-                                </div>
-                            </div>
-
                             <hr>
-                            <div class="form-group row mb-0">
-                                <div class="col-md-9 offset-md-3">
+                            <div class="d-flex justify-content-end">
+                                <div class="offset-md-3">
+                                    <form action="{{ route('department.delete', $department->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                        @method('DELETE'),
+                                        @csrf
                                     <a href="{{ route('department.edit', $department->id) }}" class="btn btn-info">Edit</a>
-                                    <a href="#" class="btn btn-outline-danger">Delete</a>
+                                    
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                                     <a href="{{ route('department.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                                </form>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
+
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header card-title">
+                    <strong>Contact Details on Deparment {{ $department->name }}</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>NO</th>
+                                        <th>NAME</th>
+                                        <th>EMAIL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($contacts as $key => $contact)
+                                        <tr>
+                                            <td>{{ $key + $contacts->firstItem() }}</td>
+                                            <td><a href="{{ route('contact.show', $contact) }}">{{ $contact->name }}</a></td>
+                                            <td>{{ $contact->email }}</td>
+                                        </tr>
+                                    @endforeach
+
+
+
+                                </tbody>
+                            </table>
+
+                            <div class="mt-4">
+                                {{ $contacts->links() }}
+                            </div>
+
+
+
+                           
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

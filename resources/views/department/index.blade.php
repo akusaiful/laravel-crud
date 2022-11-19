@@ -20,14 +20,14 @@
                             <div class="row">
 
                                 <div class="col">
-                                    <form action="">
+                                    <form action="" id="form-search">
                                         <div class="input-group mb-3">
-                                            <input type="text" name='querytext' class="form-control"
-                                                placeholder="Search..." aria-label="Search..."
-                                                aria-describedby="button-addon2">
+                                            <input type="text" name='querytext' class="form-control input-search"
+                                                placeholder="Search department..." aria-label="Search department..."
+                                                aria-describedby="button-addon2" value="{{ request()->querytext }}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button">
-                                                    <i class="fa fa-refresh"></i>
+                                                    <i class="fa fa-refresh btn-reset"></i>
                                                 </button>
                                                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">
                                                     <i class="fa fa-search"></i>
@@ -40,13 +40,7 @@
                             </div>
                         </div>
                     </div>
-
-                    @if ($message = session('message'))
-                        <div class="alert alert-success alert-fadeout">
-                            {{ $message }}
-                        </div>
-                    @endif
-
+                   
                     <div class="mt-2 mb-2">
                         Total records <b>{{ $departments->total() }}</b> |
                         Showing record {{ $departments->firstItem() }} from {{ $departments->lastItem() }}
@@ -112,4 +106,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script>
+    // reset button search
+    $('.btn-reset').on('click', function(){        
+        $('.input-search').val('');
+        $('#form-search').submit();
+    });
+</script>
 @endsection

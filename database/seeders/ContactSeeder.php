@@ -31,7 +31,7 @@ class ContactSeeder extends Seeder
 
                 // tambahan 2 column
                 'is_deleted' => false,
-                'department_id' => rand(1,5),
+                'department_id' => rand(1,10),
 
                 // updated_at dan created_at
                 'created_at' => now(),

@@ -36,6 +36,14 @@ class ContactController extends Controller
         ]);
     }
 
+    public function recycle()
+    {
+        return view('contact.recycle', [
+            'departments' => Department::all(),            
+            'contacts' => Contact::recycle()->filter()->paginate(10),            
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,8 +112,21 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->is_deleted = true;
+        $contact->delete_user_id = auth()->user()->id;      
+        $contact->delete_timestamp = now();
         $contact->update();
 
         return redirect()->route('contact.index')->with('success', 'Record successfully deleted');
+    }
+
+    public function restore(Contact $contact)
+    {
+        $contact->is_deleted = false;  
+        $contact->delete_user_id = null;      
+        $contact->delete_timestamp = null;
+        $contact->restore_timestamp = now();
+        $contact->update();
+
+        return redirect()->route('contact.recycle')->with('success', 'Record restore successfully.');   
     }
 }

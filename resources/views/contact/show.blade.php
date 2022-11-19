@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-md-3 col-form-label">Department</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-plaintext text-muted">{{ $contact->department->name }}</p>
+                                    <p class="form-control-plaintext text-muted">{{ $contact->getDepartment() }}</p>
                                 </div>
                             </div>
                         

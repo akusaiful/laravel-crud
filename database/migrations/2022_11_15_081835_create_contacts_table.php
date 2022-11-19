@@ -24,7 +24,11 @@ class CreateContactsTable extends Migration
             $table->string('address')->nullable();            
             $table->boolean('active'); 
                        
-            $table->boolean('is_deleted');            
+            $table->boolean('is_deleted')->nullable();            
+            $table->integer('delete_user_id')->nullable();
+            $table->timestamp('delete_timestamp')->nullable();
+            $table->timestamp('restore_timestamp')->nullable();
+
             // create 2 column : created_at, updated_at
             $table->timestamps();
             
