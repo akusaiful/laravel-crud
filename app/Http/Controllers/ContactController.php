@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeleteContact;
+use App\Events\RestoreContact;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Department;
@@ -111,22 +113,16 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        $contact->is_deleted = true;
-        $contact->delete_user_id = auth()->user()->id;      
-        $contact->delete_timestamp = now();
-        $contact->update();
+        // Using event
+        event(new DeleteContact($contact));
 
         return redirect()->route('contact.index')->with('success', 'Record successfully deleted');
     }
 
     public function restore(Contact $contact)
     {
-        $contact->is_deleted = false;  
-        $contact->delete_user_id = null;      
-        $contact->delete_timestamp = null;
-        $contact->restore_timestamp = now();
-        $contact->update();
-
+        // Using event
+        event(new RestoreContact($contact));
         return redirect()->route('contact.recycle')->with('success', 'Record restore successfully.');   
     }
 }

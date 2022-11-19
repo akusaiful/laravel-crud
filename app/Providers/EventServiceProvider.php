@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\DeleteContact;
+use App\Events\RestoreContact;
+use App\Listeners\DeleteContactListener;
+use App\Listeners\RestoreContactListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        DeleteContact::class => [
+            DeleteContactListener::class 
+        ],
+        RestoreContact::class => [
+            RestoreContactListener::class 
+        ]
     ];
 
     /**
