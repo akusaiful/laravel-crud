@@ -42,19 +42,8 @@ class ProfileController extends Controller
     }
 
     public function updatePassword(PasswordChangeRequest $request)
-    {
-        // dd($request);
-        // $request->validate([
-        //     'current_password' => 'required'
-        // ]);
-
-        if (!(Hash::check($request->current_password, Auth::user()->password))) {
-            // The passwords matches
-            return redirect()->back()->withInput()->with("error", "Your current password does not matches with the password.");
-        }
-
-        auth()->user()->password = Hash::make($request->password);
-        auth()->user()->update();
+    {       
+        auth()->user()->setPassword($request->password)->update();
         return redirect()->back()->with('success', 'Password succesfylly changed');
     }
 }

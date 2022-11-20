@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -49,5 +50,14 @@ class User extends Authenticatable
             return asset('upload/' . $this->profile_picture);
 
         return asset('assets/img/no_avatar.png');
+    }
+
+    /**
+     * Set user password using hash 
+     */
+    public function setPassword($password)
+    {
+        $this->password = Hash::make($password);
+        return $this;
     }
 }
