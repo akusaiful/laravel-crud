@@ -41,10 +41,10 @@
                     @endif">
                         <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">Contacts</a>
+                            aria-expanded="false">Contacts List</a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('contact.index') }}">Contact</a>
+                            <a class="dropdown-item" href="{{ route('contact.index') }}">Contacts</a>
                             <a class="dropdown-item" href="{{ route('contact.recycle') }}">
                                 Recycle Bin</a>
                         </div>

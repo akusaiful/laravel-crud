@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header card-title">
                     <div class="d-flex align-items-center">
-                        <h2 class="mb-0">All Departments</h2>
+                        <h5 class="mb-0">All Departments</h5>
                         <div class="ml-auto">
                             <a href="{{ route('department.create') }}" class="btn btn-success"><i
                                     class="fa fa-plus-circle"></i> Add New</a>
@@ -41,19 +41,19 @@
                         </div>
                     </div>
                    
-                    <div class="mt-2 mb-2">
-                        Total records <b>{{ $departments->total() }}</b> |
+                    <div class="mt-2 mb-3">
+                        <img src="{{ asset('assets/img/analysis.png') }}" alt="" width="20px"> <b>Total records : {{ $departments->total() }}</b> |
                         Showing record {{ $departments->firstItem() }} from {{ $departments->lastItem() }}
                     </div>
 
                     <table class="table table-striped table-hover">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th>Total Contact</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Department Name</th>
+                                <th scope="col">Deparment Email</th>
+                                <th scope="col">Deparment Phone</th>
+                                <th class="text-center">Total Contacts</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -65,7 +65,7 @@
                                         <td>{{ $department->name }}</td>
                                         <td>{{ $department->email }}</td>
                                         <td>{{ $department->phone }}</td>
-                                        <td>{{ $department->contacts_count }}</td>
+                                        <td class="text-center">{{ $department->contacts_count }}</td>
                                         <td width="150">
                                             <form action="{{ route('department.delete', $department->id) }}" method="POST"
                                                 onsubmit=" return confirm('Are you sure?')">

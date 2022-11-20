@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header card-title">
                     <div class="d-flex align-items-center">
-                        <div class="mb-0">{{ __('contact.title') }}</div>
+                        <h5 class="mb-0">{{ __('contact.title') }}</h5>
                         <div class="ml-auto">
                             <a href="" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                         </div>
@@ -22,13 +22,13 @@
                         </div>
                     </div>
 
-                    <div class="mt-2 mb-2">
-                        Total records <b>{{ $contacts->total() }}</b> |
+                    <div class="mt-2 mb-3">
+                        <img src="{{ asset('assets/img/analysis.png') }}" alt="" width="20px"> <b>Total records : {{ $contacts->total() }}</b> |
                         Showing record {{ $contacts->firstItem() }} from {{ $contacts->lastItem() }}
                     </div>
 
                     <table class="table table-striped table-hover">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>

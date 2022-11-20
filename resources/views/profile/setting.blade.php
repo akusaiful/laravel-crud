@@ -5,16 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    Settings
-                </div>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action active">Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action">Account</a>
-                    <a href="#" class="list-group-item list-group-item-action">Import &amp; Export</a>
-                </div>
-            </div>
+            @include('profile._menu')
         </div><!-- /.col-md-3 -->
 
         <div class="col-md-9">
@@ -46,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" name="email" id="email" class="form-control"
-                                        value="{{ $user->email }}">
+                                        value="{{ old('email', $user->email) }}">
                                 </div>
 
 
